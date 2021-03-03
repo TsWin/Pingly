@@ -2,6 +2,17 @@
 
 Le but de cet API est de pouvoir ping in siteweb a travers le lien de l'application.
 
+## Fonctionnement
+
+Le lien dépend de votre nom de domaine mais il existe une partie fixe:
+
+`/api/host/votreIPouURL.fr`
+
+### Exemple
+
+`https://mondomaine.fr/api/host/google.com`
+
+
 ## Mise en place
 
 ### Installation des modules:
