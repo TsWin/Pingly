@@ -1,6 +1,6 @@
 ## WebSite Ping API
 
-Le but de cet API est de pouvoir ping in siteweb a travers le lien de l'application.
+Le but de cet API est de pouvoir ping un siteweb à travers le lien de l'application.
 
 ## Fonctionnement
 
@@ -12,6 +12,10 @@ Le lien dépend de votre nom de domaine mais il existe une partie fixe:
 
 `https://mondomaine.fr/api/host/google.com`
 
+### API Publique
+
+Le site [ping-it.ml](https://ping-it.ml/) est et sera continuellement actualisé avec la dernière version de cette api. 
+Vous pouvez donc utiliser ce lien librement et a bon escient. 
 
 ## Mise en place
 
