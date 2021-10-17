@@ -15,41 +15,170 @@ Le but de cet API est de pouvoir ping un siteweb à travers le lien de l'applica
 
 ## Fonctionnement
 
-### Basique
-Le lien dépend de votre nom de domaine mais il existe une partie fixe:
+### Versions
 
-`/api/host/votreIPouURL.fr`
+L'API gardes ces anciennes versions de fonctionnement, vous pouvez donc choisir la version de l'API que vous souhaitez dans le lien de la requête.
+
+`/api/vX/` (X = version de l'API)
 
 <details>
 <summary>Exemple</summary>
 
-`https://mondomaine.fr/api/host/google.com`
+`https://mondomaine.fr/api/v2/`
+</details>
+
+### Basique
+
+Version API:
+<details>
+<summary>v1</summary>
+
+Le lien dépend de votre nom de domaine mais il existe une partie fixe:
+
+`/api/v1/host/votreIPouURL.fr`
+
+<details>
+<summary>Exemple</summary>
+
+`https://mondomaine.fr/api/v1/host/google.com`
+</details>
+
+<details>
+<summary>Résultat Attendu</summary>
+
+```json
+{
+    "pingInfo": {
+        "host": "google.com",
+        "alive": true,
+        "output": "PING google.com (172.217.19.238): 56 data bytes\n64 bytes from 172.217.19.238: icmp_seq=0 ttl=119 time=15.800 ms\n\n--- google.com ping statistics ---\n1 packets transmitted, 1 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 15.800/15.800/15.800/0.000 ms\n",
+        "time": 15.8,
+        "times": [
+            15.8
+        ],
+        "min": "15.800",
+        "max": "15.800",
+        "avg": "15.800",
+        "stddev": "0.000",
+        "packetLoss": "0.000",
+        "numeric_host": "172.217.19.238"
+    },
+    "statusInfo": {
+        "sitewebAccessible": true,
+        "statusCode": 200,
+        "error": null,
+        "statusMessage": "OK"
+    }
+}
+```
+</details>
+
+</details>
+<details>
+<summary>v2</summary>
+
+Le lien dépend de votre nom de domaine mais il existe une partie fixe qui dépend de votre demande:
+
+#### Ping Simple
+
+`/api/v2/ping/votreIPouURL.fr`
+
+<details>
+<summary>Exemple</summary>
+
+`https://mondomaine.fr/api/v2/ping/google.com`
+</details>
+
+<details>
+<summary>Résultat Attendu</summary>
+
+```json
+{
+    "pingInfo": {
+        "host": "google.com",
+        "alive": true,
+        "output": "PING google.com (142.250.178.142): 56 data bytes\n64 bytes from 142.250.178.142: icmp_seq=0 ttl=119 time=14.771 ms\n\n--- google.com ping statistics ---\n1 packets transmitted, 1 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 14.771/14.771/14.771/0.000 ms\n",
+        "time": 14.771,
+        "times": [
+            14.771
+        ],
+        "min": "14.771",
+        "max": "14.771",
+        "avg": "14.771",
+        "stddev": "0.000",
+        "packetLoss": "0.000",
+        "numeric_host": "142.250.178.142"
+    }
+}
+```
+</details>
+
+#### Ping avec Statut
+
+`/api/v2/status/votreIPouURL.fr`
+
+<details>
+<summary>Exemple</summary>
+
+`https://mondomaine.fr/api/v2/status/google.com`
+</details>
+
+<details>
+<summary>Résultat Attendu</summary>
+
+```json
+{
+    "pingInfo": {
+        "host": "google.com",
+        "alive": true,
+        "output": "PING google.com (216.58.213.142): 56 data bytes\n64 bytes from 216.58.213.142: icmp_seq=0 ttl=119 time=15.788 ms\n\n--- google.com ping statistics ---\n1 packets transmitted, 1 packets received, 0.0% packet loss\nround-trip min/avg/max/stddev = 15.788/15.788/15.788/0.000 ms\n",
+        "time": 15.788,
+        "times": [
+            15.788
+        ],
+        "min": "15.788",
+        "max": "15.788",
+        "avg": "15.788",
+        "stddev": "0.000",
+        "packetLoss": "0.000",
+        "numeric_host": "216.58.213.142"
+    },
+    "statusInfo": {
+        "sitewebAccessible": true,
+        "statusCode": 200,
+        "error": null,
+        "statusMessage": "OK"
+    }
+}
+```
+</details>
+
 </details>
 
 ### Options
 #### Port
-Vous pouvez maintenant ping un lien qui contient un port en rajoutant ceci:
+Vous pouvez ping un lien qui contient un port en rajoutant ceci:
 > <> ne pas ajouter
 
-/api/host/votreIPouURL.fr`?port=<votre port>`
+.../votreIPouURL.fr`?port=<votre port>`
 
 <details>
 <summary>Exemple</summary>
 
-`https://mondomaine.fr/api/host/google.com?port=80`
+`.../google.com?port=80`
 </details>
 
 #### Timeout
 
-Vous pouvez maintenant choisir le temps avant que la requête soit annulée
+Vous pouvez choisir le temps avant que la requête soit annulée
 > <> ne pas ajouter
 
-/api/host/votreIPouURL.fr`?timeout=<temps en millisecondes>`
+.../votreIPouURL.fr`?timeout=<temps en millisecondes>`
 
 <details>
 <summary>Exemple</summary>
 
-`https://mondomaine.fr/api/host/google.com?timeout=5000`
+`.../google.com?timeout=5000`
 </details>
 
 #### Ajouter plusieures options
@@ -58,7 +187,7 @@ Pour cela il vous suffit de remplacer le deuxième `?` par un `&`
 <details>
 <summary>Exemple</summary>
 
-`https://mondomaine.fr/api/host/google.com?port=80&timeout=5000`
+`.../google.com?port=80&timeout=5000`
 </details>
 
 ### API Publique

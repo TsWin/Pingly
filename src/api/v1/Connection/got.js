@@ -5,7 +5,6 @@ async function getGotInfo(host, options) {
     const timeoutValue = parseInt(options.timeout)
     try {
         let response = await got(`http://${host}`, { https: { rejectUnauthorized: false }, timeout: timeoutValue, retry: { limit: 0, }, });
-        console.log(response)
         return { sitewebAccessible: true, statusCode: response.statusCode, error: null, statusMessage: response.statusMessage, }
     } catch (error) {
         if (error instanceof HTTPError) {
