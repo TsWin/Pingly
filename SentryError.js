@@ -3,11 +3,12 @@ const Sentry = require("@sentry/node");
 const { version } = require("./package.json");
 // eslint-disable-next-line no-unused-vars
 const Tracing = require("@sentry/tracing");
+const { name } = require("./package.json");
 
 // initialises Sentry
 Sentry.init({
 	dsn: process.env.SENTRY_ENDPOINT,
-	release: process.env.npm_package_name + "@" + version,
+	release: name + "@" + version,
 	environment: process.env.NODE_ENV,
 });
 
