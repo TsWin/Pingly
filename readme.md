@@ -203,9 +203,14 @@ Pour installer les modules nécéssaire au bon fonctionnement de l'API il faut �
 
 `npm install`
 
-### Configuration du port:
+### Tracking d'erreurs avec Sentry
 
-Il existe normalement un fichier `.env.exemple` il faut le renommer et enlever le `.exemple`. Vous pourrez par la suite modifier le port de l'application
+Cette API utilise [Sentry](https://sentry.io/) comme logiciel d'enregistrement d'erreurs et de performances. Pour faire fonctionner ce système il suffit de mettre la clé correspondant à votre projet dans Sentry dans le fichier `.env` (expliqué [ici](#configuration)). 
+> Cette fonctionnalité n'est pas obligatoire mais est cependant fortement recommandée.
+
+### Configuration:
+
+Il existe un fichier `.env.exemple` il faut le renommer et enlever le `.exemple`. Vous pourrez par la suite modifier les informations si situant à l'intérieur pour changer la configuration de votr API
 
 ## Informations:
 

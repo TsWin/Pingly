@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const { getPing } = require('../Connection/ping')
 const { getTcpPing } = require('../Connection/tcp-ping')
+const { SentryError } = require('../../../../SentryError');
 
 router.get('/:hostaddress?', async (req, res) => {
     const host = req.params.hostaddress
@@ -34,6 +35,7 @@ router.get('/:hostaddress?', async (req, res) => {
         const ping = await getPing(host)
         res.status(200).json({ pingInfo: ping, portPing: tcpPing });
     } catch (error) {
+        new SentryError(error);
         console.log(error)
         return res.status(500).send({ status: 500, error: 'Unknown Error', msg: `Une erreur c\'est produite: ${error}`})
     }
