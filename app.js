@@ -30,11 +30,12 @@ Sentry.init({
     ],
 
     tracesSampleRate: 1.0,
+    debug: process.env.NODE_ENV == "development" ? true : false,
 });
   
-app.use(Sentry.Handlers.requestHandler());
+app.use(Sentry.Handlers.requestHandler({ ip: true }));
 app.use(Sentry.Handlers.tracingHandler());
-app.use(Sentry.Handlers.errorHandler());
+
 
 const cors = require("cors");
 app.use(cors());
@@ -42,13 +43,21 @@ app.use(cors());
 app.get('/',function(req, res) {
   res.sendFile(__dirname + '/index.html');
 });
+app.get("/debug-sentry", function mainHandler(req, res) {
+  throw new Error("My first Sentry error!");
+});
 
 const v1Routes = require('./src/api/v1/Routes');
 const v2Routes = require('./src/api/v2/Routes');
 const { SentryError } = require("./SentryError");
 app.use('/api/v1', v1Routes);
 app.use('/api/v2', v2Routes);
-    
+
+app.use(Sentry.Handlers.errorHandler());
+app.use(function onError(err, req, res, next) {
+  res.status(500).end(`Error ID: ${res.sentry}` + "\n" + `Error Details: ${err}`);
+});    
+
 app.listen(PORT, () => console.log(`API Démarré sur le port: ${PORT}`));
 
 process.on("unhandledRejection", (err) => {
