@@ -12,18 +12,18 @@ router.get('/:hostaddress?', async (req, res) => {
     let options;
 
     try {
-        function portPing(err, response) {
-            if (isNaN(response.avg)) {
-                tcpPing = { status: 400, error: 'Bad Request', msg: 'Host introuvable ou inconnu' }
-                return tcpPing
-            }
-            tcpPing = response;
-            return tcpPing
-        }
-
         if (port) {
             if (isNaN(port)) return res.status(400).send({ status: 400, error: 'Bad Request', msg: `Le port n'est pas un nombre`})
-            tcpPing = await getTcpPing(host, port, portPing)
+            const response = await getTcpPing(host, port);
+            const erroredResults = [];
+            response.results.forEach((result) => {
+                if (result.err) erroredResults.push(result.err);
+            });
+            if (erroredResults.length > 5) {
+                tcpPing = { status: 502, error: 'Bad Gateway', msg: erroredResults[0].message }
+            } else {
+                tcpPing = response;
+            }
         }
         if (timeoutValue) {
             if (isNaN(timeoutValue)) return res.status(400).send({ status: 400, error: 'Bad Request', msg: `Le temps du timeout n'est pas un nombre` })
