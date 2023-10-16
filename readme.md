@@ -1,6 +1,6 @@
-## WebSite Ping API
+## Pingly
 
-Le but de cet API est de pouvoir ping un siteweb à travers le lien de l'application.
+Le but de cet API est de pouvoir ping et faire du monitoring de statut sur un siteweb/IP.
 
 
 ## Points importants
@@ -17,7 +17,7 @@ Le but de cet API est de pouvoir ping un siteweb à travers le lien de l'applica
 
 ### Versions
 
-L'API gardes ces anciennes versions de fonctionnement, vous pouvez donc choisir la version de l'API que vous souhaitez dans le lien de la requête.
+L'API garde ces anciennes versions de fonctionnement, vous pouvez donc choisir la version de l'API que vous souhaitez dans le lien de la requête.
 
 `/api/vX/` (X = version de l'API)
 
@@ -192,7 +192,7 @@ Pour cela il vous suffit de remplacer le deuxième `?` par un `&`
 
 ### API Publique
 
-Le site [ping-it.ml](https://ping-it.ml/) est et sera continuellement actualisé avec la dernière version de cette api. 
+Le site [pingly.app](https://pingly.app/) est et sera continuellement actualisé avec la dernière version de cette api. 
 Vous pouvez donc utiliser ce lien librement et a bon escient. 
 
 ## Mise en place
@@ -206,11 +206,11 @@ Pour installer les modules nécéssaire au bon fonctionnement de l'API il faut �
 ### Tracking d'erreurs avec Sentry
 
 Cette API utilise [Sentry](https://sentry.io/) comme logiciel d'enregistrement d'erreurs et de performances. Pour faire fonctionner ce système il suffit de mettre la clé correspondant à votre projet dans Sentry dans le fichier `.env` (expliqué [ici](#configuration)). 
-> Cette fonctionnalité n'est pas obligatoire mais est cependant fortement recommandée.
+> Cette fonctionnalité n'est pas obligatoire mais est cependant fortement recommandée pour avoir un aperçu des erreurs qu'il pourrait avoir lieu.
 
 ### Configuration:
 
-Il existe un fichier `.env.exemple` il faut le renommer et enlever le `.exemple`. Vous pourrez par la suite modifier les informations si situant à l'intérieur pour changer la configuration de votr API
+Il existe un fichier `.env.exemple` il faut le renommer et enlever le `.exemple`. Vous pourrez par la suite modifier les informations si situant à l'intérieur pour changer la configuration de votre API
 
 ## Informations:
 
